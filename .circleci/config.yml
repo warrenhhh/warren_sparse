@@ -8,7 +8,7 @@ jobs:
             - checkout
             - run:
                 name: Install dependency
-                command: pip install pytest && pip install numpy
+                command: pip install pytest && pip install numpy && pip install scipy
             - run:
                 name: Run tests
                 command: pytest test_sparse_recommenderpy.py
