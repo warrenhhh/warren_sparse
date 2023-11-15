@@ -7,11 +7,14 @@ class sparse_matrix(csr_matrix):
     def __init__(self, row, col, dtype=np.int32):
         super().__init__((row, col), dtype=dtype)
         self.initialize_sparse_matrix()
+    
+    def initialize_sparse_martix(self):
         self.set = 0
         self.get = {}
         self.recommend = {}
         self.add_movie = {}
         self.to_dense = {}
+        pass
 
     def set(self, row, col, value):
         if value != 0 and 0 <= row < self.initrow and 0 <= col < self.initcol:
