@@ -1,0 +1,40 @@
+version: 2.1
+
+jobs:
+  test: 
+        docker:
+            - image: cimg/python:3.8
+        steps:
+            - checkout
+            - run:
+                name: Install dependency
+                command: pip install pytest
+            - run:
+                name: Run tests
+                command: pytest test_sparse_recommender.py
+  push:
+    docker:
+      - image: cimg/python:3.8
+    steps:
+      - checkout
+      - setup_remote_docker:
+          version: 19.03.13
+      - run:
+          name: Build Docker Image
+          command: docker build -t $DOCKERHUB_USERNAME/sparse_recommender:${CIRCLE_SHA1} .
+      - run:
+          name: Authenticate with Docker Hub
+          command: echo "$DOCKERHUB_PASS" | docker login --username $DOCKERHUB_USERNAME --password-stdin
+      - run:
+          name: Push Docker Image to Docker Hub
+          command: docker push $DOCKERHUB_USERNAME/sparse_recommender:${CIRCLE_SHA1}
+workflows:
+    testing:
+      jobs:
+        - test
+    build_and_deploy:
+      jobs:
+        - push:
+            filters:
+              branches:
+                only: main
