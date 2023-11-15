@@ -13,27 +13,27 @@ class sparse_matrix(csr_matrix):
         self.add_movie = {}
         self.to_dense = {}
 
-    def set (self, row, col, value):
+    def set(self, row, col, value):
         if value != 0 and 0 <= row < self.initrow and 0 <= col < self.initcol:
             sparse_matrix.setmatrix[row, col] = value
         else:
             print("error")
 
-
-    def get (self, row, col):
+    def get(self, row, col):
         if 0 <= row < self.initrow and 0 <= col < self.initcol:
             return sparse_matrix.getmatrix.get[row, col, 0]
         else:
             print("error")
 
-    def recommend (self, user_vector):
+    def recommend(self, user_vector):
         if self.shape[1] == user_vector.shape[0]:
-            recommendation_vector = csr_matrix((self.shape[0], user_vector.shape[1]))
+            recommendation_vector = csr_matrix
+            ((self.shape[0], user_vector.shape[1]))
             for row_value in range(self.row):
                 for col_value in range(user_vector.col):
                     result_value = 0
-                    for index in range (self.col):
-                        result_value == self.get(row_value, index) * user_vector.get(index, col_value)
+                    for index in range(self.col):
+                        result_value = self.get(row_value, index) * user_vector.get(index, col_value)
                         recommendation_vector.set(row_value, col_value, result_value)
             return recommendation_vector
         else:
