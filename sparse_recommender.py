@@ -52,3 +52,6 @@ class sparse_matrix(csr_matrix):
     def to_dense(self):
         dense_matrix = self.toarray()
         return dense_matrix
+    
+    def __getitem__(self, key):
+        return self.setmatrix[key]
