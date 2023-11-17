@@ -50,7 +50,7 @@ class sparse_matrix(csr_matrix):
             print("row is not the same with user_vector, error")
     
     def to_dense(self):
-        dense_matrix = self.toarray()
+        dense_matrix = super().toarray()
         return dense_matrix
     
     def __getitem__(self, key):
